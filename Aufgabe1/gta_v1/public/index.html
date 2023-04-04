@@ -7,41 +7,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeoTagApp</title>
+    <title>GTA Online</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="./stylesheets/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
     <header class="header">
-        <img src="./images/location.png" class="header__image" alt="an image of a map and location">
-        <h1 class="header__title">GeoTagApp</h1>
-        <nav class="header__navigation">
+        
+        <img src="./images/logo.png" class="header__image left" alt="an image of a map and location">
+        <h1 class="header__title center">Geotagg</h1>
+        <nav class="header__navigation right">
             <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
         </nav>
     </header>
 
-    <main class="main">
-        <section class="main__tagging tagging">
-            <h2>Tagging</h2>
+    <main class="main row">
+        <section class="main__tagging tagging col-3">
+            <h2 class="section__heading">Tagging</h2>
 
             <!-- ############### VS1Lab 1a Form 1 Start -->
             <form id="tag-form" action="/tagging" method="post">
 
-                <!-- ... your code here ... -->
+                <fieldset>
+                    <legend class="fieldset__legend">Add a new Geotagg</legend>
+                    <label for="text_field_latitude">Latitude:</label> <input type="text" id="lat_name" name="text_field_latitude" value="48.946760" size="20"/>
+                    <label for="text_field_longitude">Longitude:</label> <input type="text" id="long_name" name="text_field_longitude" value="8.395630" size="20"/>
+                    <label for="text_field_name">Name:</label> <input type="text" id="tagg_name" name="text_field_name" size="20" maxlength="10" placeholder="e.g. homebase" required/>
+                    <label for="text_field_hashtag">Hashtag:</label> <input type="text" id="hashtag" name="text_field_hashtag" size="20" pattern="^[#].*" placeholder="e.g. #wide" maxlength="11"/>
+                    <input class="button" type="submit" value="Add Geotagg"> 
+                </fieldset>
 
             </form>
             <!-- ############### VS1Lab 1a Form 1 End -->
 
         </section>
 
-        <section class="main__discovery discovery">
-            <h2 class="discovery__title">Discovery</h2>
+        <section class="main__discovery discovery col-8">
+            <h2 class="section__heading discovery__title">Discovery</h2>
 
             <!-- ############### VS1Lab 1a Form 2 Start -->
             <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
 
-                <!-- ... your code here ... -->
+                <fieldset>
+                    <legend class="fieldset__legend">Search existing Geotaggs</legend>
+                        <label for="text_field_searchterm">What are you looking for:</label> <input type="text" id="searchterm" name="text_field_searchterm" size="20" placeholder="e.g. Moltke Mensa"/>
+                        <label for="text_field_latitude"></label> <input type="text" id="lat_name" name="text_field_latitude" size="20" hidden/>
+                        <label for="text_field_longitude"></label> <input type="text" id="long_name" name="text_field_longitude" size="20" hidden/>
+                        <input class="button" type="submit" value="Search">
+                </fieldset>
 
             </form>
             <!-- ############### VS1Lab 1a Form 2 End -->
@@ -55,7 +70,7 @@
                 </div>
 
                 <div class="discovery__map">
-                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView" />
+                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView"/>
                     <span>Result map</span>
                 </div>
             </div>
@@ -64,7 +79,7 @@
     </main>
 
     <footer class="footer">
-        <span>(c) 2021/22 HKA_IWI_VSYS</span>
+        <span>(c) 2023 HKA_IWI_VSYS</span>
     </footer>
 </body>
 
