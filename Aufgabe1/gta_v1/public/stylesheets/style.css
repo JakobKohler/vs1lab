@@ -91,12 +91,12 @@ fieldset label{
   margin-top: 20px;
   padding: 10px 20px 10px 20px;
   border-radius: 50px;
-  transition: transform 10s cubic-bezier(0.075, 0.82, 0.165, 1);
-  background-color: var(--offfff-color);
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: #e22e5e;
 }
 
 .button:hover {
-  transform: translate(500px, 500px) scale(1.05);
+  transform: scale(1.05);
 }
 
 .button:active {
@@ -181,14 +181,22 @@ header .left{
   max-height: 60%;
 }
 
+header .center{
+  margin: 0 auto;
+}
+
 header .right{
   position: absolute;
   right: 2rem;
   font-size: 1vw;
 }
 
-header .center{
-  margin: 0 auto;
+header img {
+  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+header img:hover {
+  transform: translate(325px,350px) scale(10);
 }
 
 /* ### TODO ### Styles for Main Component */
