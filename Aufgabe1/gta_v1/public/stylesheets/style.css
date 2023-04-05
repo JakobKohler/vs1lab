@@ -85,6 +85,10 @@ fieldset label {
   margin: 0 0 0 10px;
 }
 
+fieldset label.hidden_label{
+  margin: 0;
+}
+
 .button {
   margin-top: 20px;
   padding: 10px 20px 10px 20px;
