@@ -20,9 +20,9 @@ html {
 :root {
   --link-color: #88d498;
   --background-color: #114b5f;
-  --gray-color: #666;
   --text-color: #f3e9d2;
   --offfff-color: #1a936f;
+  --button-color: #e22e5e;
 }
 
 
@@ -94,7 +94,7 @@ fieldset label.hidden_label{
   padding: 10px 20px 10px 20px;
   border-radius: 50px;
   transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-  background-color: #e22e5e;
+  background-color: var(--button-color);
 }
 
 .button:hover {
@@ -309,6 +309,7 @@ footer {
   }
 
   header .left {
+    left: 1.5rem;
     max-height: 50%;
   }
 
