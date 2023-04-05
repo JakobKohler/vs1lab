@@ -231,8 +231,8 @@ header img:hover {
 
 .discovery__map img {
   width: 100%;
-  border-radius: 500px;
-  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  border-radius: 10px;
+  /*transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);*/
 }
 
 .discovery__map img:hover {
@@ -241,6 +241,9 @@ header img:hover {
 
 .discovery__map span {
   display: block;
+  margin-top: 10px;
+
+  font-size: smaller;
   text-align: center;
 }
 
