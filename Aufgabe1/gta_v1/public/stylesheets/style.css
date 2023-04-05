@@ -171,7 +171,6 @@ header {
   height: 15vh;
   margin-bottom: 1rem;
   
-
   position: relative; 
   justify-content: space-between;
   align-items: center;
@@ -273,9 +272,18 @@ footer {
   display: flex;
   margin-top: 1rem;
   padding: 2rem;
+
+  position: relative;
+  align-items: center;
   
   background-color: var(--offfff-color);
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer .right {
+  position: absolute;
+  right: 2rem;
+  max-height: 60%;
 }
 
 /* ### TODO ### Media Queries */
