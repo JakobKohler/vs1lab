@@ -276,7 +276,7 @@ footer {
 
 /* ### TODO ### Media Queries */
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 815px) {
   .row {
     flex-direction: column;
     align-items: center;
