@@ -16,7 +16,7 @@
 <body>
     <header class="header">
         
-        <img src="./images/penneplaces.png" class="header__image left" alt="an image of a map and location">
+        <img src="./images/penneplaces.png" class="header__image left" alt="an image of a noodle with hands">
         <h1 class="header__title center">Penne Places</h1>
         <nav class="header__navigation right">
             <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
@@ -31,7 +31,7 @@
             <form id="tag-form" action="/tagging" method="post">
 
                 <fieldset>
-                    <legend class="fieldset__legend">Add a new Geotagg</legend>
+                    <legend class="fieldset__legend">Add a new Penne Place</legend>
                     <label for="text_field_latitude">Latitude:</label> <input type="text" id="lat_name" name="text_field_latitude" value="48.946760" size="20"/>
                     <label for="text_field_longitude">Longitude:</label> <input type="text" id="long_name" name="text_field_longitude" value="8.395630" size="20"/>
                     <label for="text_field_name">Name:</label> <input type="text" id="tagg_name" name="text_field_name" size="20" maxlength="10" placeholder="e.g. homebase" required/>
@@ -51,7 +51,7 @@
             <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
 
                 <fieldset>
-                    <legend class="fieldset__legend">Search existing Geotaggs</legend>
+                    <legend class="fieldset__legend">Search existing Penne Place</legend>
                         <label for="text_field_searchterm">What are you looking for:</label> <input type="text" id="searchterm" name="text_field_searchterm" size="20" placeholder="e.g. Moltke Mensa"/>
                         <label for="text_field_latitude" class="hidden_label"></label> <input type="text" id="lat_name" name="text_field_latitude" size="20" hidden/>
                         <label for="text_field_longitude" class="hidden_label"></label> <input type="text" id="long_name" name="text_field_longitude" size="20" hidden/>
