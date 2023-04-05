@@ -3,84 +3,140 @@
 <!-- File origin: VS1LAB A1a -->
 
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Penne Places</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="./stylesheets/style.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<body>
+  <body>
     <header class="header">
-        <img src="./images/penneplaces.png" class="header__image left" alt="an image of a noodle with hands">
-        <h1 class="header__title center">Penne Places</h1>
-        <nav class="header__navigation right">
-            <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
-        </nav>
+      <img
+        src="./images/penneplaces.png"
+        class="header__image left"
+        alt="an image of a noodle with hands"
+      />
+      <h1 class="header__title center">Penne Places</h1>
+      <nav class="header__navigation right">
+        <a href="#">About</a> | <a href="#">Help</a> | <a href="/">Home</a>
+      </nav>
     </header>
 
     <main class="main row">
-        <section class="main__tagging tagging col-3">
-            <h2 class="section__heading">Tagging</h2>
+      <section class="main__tagging tagging col-3">
+        <h2 class="section__heading">Tagging</h2>
 
-            <!-- ############### VS1Lab 1a Form 1 Start -->
-            <form id="tag-form" action="/tagging" method="post">
+        <!-- ############### VS1Lab 1a Form 1 Start -->
+        <form id="tag-form" action="/tagging" method="post">
+          <fieldset>
+            <legend class="fieldset__legend">Add a new Penne Place</legend>
+            <label for="text_field_latitude">Latitude:</label>
+            <input
+              type="text"
+              id="lat_name"
+              name="text_field_latitude"
+              value="48.946760"
+            />
+            <label for="text_field_longitude">Longitude:</label>
+            <input
+              type="text"
+              id="long_name"
+              name="text_field_longitude"
+              value="8.395630"
+            />
+            <label for="text_field_name">Name:</label>
+            <input
+              type="text"
+              id="tagg_name"
+              name="text_field_name"
+              maxlength="10"
+              placeholder="e.g. homebase"
+              required
+            />
+            <label for="text_field_hashtag">Hashtag:</label>
+            <input
+              type="text"
+              id="hashtag"
+              name="text_field_hashtag"
+              pattern="^[#].*"
+              placeholder="e.g. #wide"
+              maxlength="11"
+            />
+            <input class="button" type="submit" value="Add Geotagg" />
+          </fieldset>
+        </form>
+        <!-- ############### VS1Lab 1a Form 1 End -->
+      </section>
 
-                <fieldset>
-                    <legend class="fieldset__legend">Add a new Penne Place</legend>
-                    <label for="text_field_latitude">Latitude:</label> <input type="text" id="lat_name" name="text_field_latitude" value="48.946760" size="20"/>
-                    <label for="text_field_longitude">Longitude:</label> <input type="text" id="long_name" name="text_field_longitude" value="8.395630" size="20"/>
-                    <label for="text_field_name">Name:</label> <input type="text" id="tagg_name" name="text_field_name" size="20" maxlength="10" placeholder="e.g. homebase" required/>
-                    <label for="text_field_hashtag">Hashtag:</label> <input type="text" id="hashtag" name="text_field_hashtag" size="20" pattern="^[#].*" placeholder="e.g. #wide" maxlength="11"/>
-                    <input class="button" type="submit" value="Add Geotagg"> 
-                </fieldset>
+      <section class="main__discovery discovery col-8">
+        <h2 class="section__heading discovery__title">Discovery</h2>
 
-            </form>
-            <!-- ############### VS1Lab 1a Form 1 End -->
+        <!-- ############### VS1Lab 1a Form 2 Start -->
+        <form
+          class="discovery__search"
+          id="discoveryFilterForm"
+          action="/discovery"
+          method="post"
+        >
+          <fieldset>
+            <legend class="fieldset__legend">
+              Search existing Penne Places
+            </legend>
+            <label for="text_field_searchterm">What are you looking for:</label>
+            <input
+              type="text"
+              id="searchterm"
+              name="text_field_searchterm"
+              size="20"
+              placeholder="e.g. Moltke Mensa"
+            />
+            <label for="text_field_latitude" class="hidden_label"></label>
+            <input
+              type="text"
+              id="lat_name"
+              name="text_field_latitude"
+              size="20"
+              hidden
+            />
+            <label for="text_field_longitude" class="hidden_label"></label>
+            <input
+              type="text"
+              id="long_name"
+              name="text_field_longitude"
+              size="20"
+              hidden
+            />
+            <input class="button" type="submit" value="Search" />
+          </fieldset>
+        </form>
+        <!-- ############### VS1Lab 1a Form 2 End -->
 
-        </section>
+        <div class="discovery__wrapper">
+          <div class="discovery__taglist">
+            <ul class="discovery__results" id="discoveryResults">
+              <li>Castle (49.01379, 8.404435) #sight</li>
+              <li>IWI (49.01379, 8.390071) #edu</li>
+            </ul>
+          </div>
 
-        <section class="main__discovery discovery col-8">
-            <h2 class="section__heading discovery__title">Discovery</h2>
-
-            <!-- ############### VS1Lab 1a Form 2 Start -->
-            <form class="discovery__search" id="discoveryFilterForm" action="/discovery" method="post">
-
-                <fieldset>
-                    <legend class="fieldset__legend">Search existing Penne Places</legend>
-                        <label for="text_field_searchterm">What are you looking for:</label> <input type="text" id="searchterm" name="text_field_searchterm" size="20" placeholder="e.g. Moltke Mensa"/>
-                        <label for="text_field_latitude" class="hidden_label"></label> <input type="text" id="lat_name" name="text_field_latitude" size="20" hidden/>
-                        <label for="text_field_longitude" class="hidden_label"></label> <input type="text" id="long_name" name="text_field_longitude" size="20" hidden/>
-                        <input class="button" type="submit" value="Search">
-                </fieldset>
-
-            </form>
-            <!-- ############### VS1Lab 1a Form 2 End -->
-
-            <div class="discovery__wrapper">
-                <div class="discovery__taglist">
-                    <ul class="discovery__results" id="discoveryResults">
-                        <li>Castle (49.01379, 8.404435) #sight</li>
-                        <li>IWI (49.01379, 8.390071) #edu</li>
-                    </ul>
-                </div>
-
-                <div class="discovery__map">
-                    <img src="./images/mapview.jpg" alt="a map with locations" id="mapView"/>
-                    <span>Result map</span>
-                </div>
-            </div>
-        </section>
-
+          <div class="discovery__map">
+            <img
+              src="./images/mapview.jpg"
+              alt="a map with locations"
+              id="mapView"
+            />
+            <span>Result map</span>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="footer">
-        <span>(c) 2023 HKA_IWI_VSYS</span>
-        <img src="./images/logo.png" class="footer__image right">
+      <span>(c) 2023 HKA_IWI_VSYS</span>
+      <img src="./images/logo.png" class="footer__image right" />
     </footer>
-</body>
-
+  </body>
 </html>
