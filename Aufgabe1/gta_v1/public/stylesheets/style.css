@@ -205,7 +205,7 @@ header img {
 }
 
 header img:hover {
-  transform: translate(325px, 350px) scale(10);
+  transform: scale(1.2);
 }
 
 /* ### TODO ### Styles for Main Component */
