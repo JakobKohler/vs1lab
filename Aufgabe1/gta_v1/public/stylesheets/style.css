@@ -1,11 +1,5 @@
-/*
-  File origin: VS1LAB A1b  
-
-  CSS style is BEM. Classes used for CSS, IDs for JavaScript querying (future use).
-  CSS variables used for clarity and themability (e.g. through SSR). 
-  Inherited box sizing used for ease of including 3rd party content-box components.
-*/
-
+/* File origin: VS1LAB A1b CSS style is BEM. Classes used for CSS,
+IDs for JavaScript querying (future use). CSS variables used for clarity and themability (e.g. through SSR). Inherited box sizing used for ease of including 3rd party content-box components. */
 /* Global styling */
 
 html {
@@ -15,29 +9,34 @@ html {
 * {
   margin: 0;
   padding: 0;
-
+  transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   /* This approach prevents issues with 3rd party content-box components */
   box-sizing: inherit;
 }
 
-
 /* Variables (example: see declaration for "a" below) */
 
 :root {
-  --link-color: #00B7FF;
-  --background-color: #efefef;
-  --border-color: #cdcdcd;
-  --gray-color: #666;
+  --link-color: #88d498;
+  --background-color: #114b5f;
+  --text-color: #f3e9d2;
+  --offfff-color: #1a936f;
+  --button-color: #e22e5e;
 }
-
 
 /* HTML element styles */
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  justify-content: space-between;
+
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: var(--text-color);
+
+  background-color: var(--background-color);
 }
 
 a {
@@ -46,15 +45,74 @@ a {
 
 /* ### TODO ### Styles for other HTML elements */
 
-/* ... your code here ... */
+.section__heading {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
 
+fieldset {
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: larger;
+  max-width: 100%;
+  width: 100%;
+}
+
+.fieldset__legend {
+  margin-left: 10px;
+  font-weight: bolder;
+}
+
+fieldset input {
+  display: block;
+  margin: 5px 0 10px 10px;
+  padding: 5px;
+  box-sizing: border-box;
+  max-width: 30ch;
+  width: 90%;
+  border: none;
+  border-radius: 3px;
+
+  font-size: large;
+  color: var(--text-color);
+
+  background-color: #ffffff20;
+
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+fieldset label {
+  margin: 0 0 0 10px;
+}
+
+fieldset label.hidden_label {
+  margin: 0;
+}
+
+.button {
+  margin-top: 20px;
+  padding: 10px 20px 10px 20px;
+  border-radius: 50px;
+  max-width: 10rem;
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  background-color: var(--button-color);
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
 
 /* Grid styles (no changes required) */
 
 .row {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex: 1;
 }
 
@@ -106,32 +164,227 @@ a {
   width: calc(100% - 1rem);
 }
 
-
 /* ### TODO ### Styles for Header Component */
 
-/* ... your code here ... */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  height: 15vh;
+  margin-bottom: 1rem;
 
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--offfff-color);
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.5);
+}
+
+.header__title {
+  font-size: 3.33vw;
+  transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.header__title:hover {
+  transform: scaleX(3);
+  background: linear-gradient(
+    to right,
+    #6666ff,
+    #0099ff,
+    #00ff00,
+    #ff3399,
+    #6666ff,
+    #0099ff
+  );
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 3s linear infinite forwards;
+  background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
+}
+
+header .left {
+  position: absolute;
+  left: 2rem;
+  max-height: 60%;
+}
+
+header .center {
+  margin: 0 auto;
+}
+
+header .right {
+  position: absolute;
+  right: 2rem;
+  font-size: 1vw;
+}
+
+header img {
+  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+header img:hover {
+  transform: scale(1.2);
+}
 
 /* ### TODO ### Styles for Main Component */
-
-/* ... your code here ... */
-
 
 /* ### TODO ### Styles for Tagging component */
 
 /* ... your code here ... */
 
-
 /* ### TODO ### Styles for Discovery component */
 
-/* ... your code here ... */
+.discovery__wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
 
+.discovery__map {
+  display: block;
+  width: 57.5%;
+}
+
+.discovery__map img {
+  width: 100%;
+  border-radius: 10px;
+  /*transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);*/
+}
+
+.discovery__map img:hover {
+  border-radius: 10px;
+}
+
+.discovery__map span {
+  display: block;
+  margin-top: 10px;
+
+  font-size: smaller;
+  text-align: center;
+}
+
+.discovery__results {
+  list-style: none;
+}
+
+.discovery__taglist {
+  width: 37.5%;
+}
+
+.discovery__results li {
+  padding: 1.3rem;
+  margin: 0 0 20px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0px solid;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  background-color: #ffffff20;
+}
+
+input[hidden] {
+  display: none;
+}
 
 /* ### TODO ### Styles for Footer Component */
 
-/* ... your code here ... */
+footer {
+  display: flex;
+  margin-top: 1rem;
+  padding: 2rem;
 
+  position: relative;
+  align-items: center;
+
+  background-color: var(--offfff-color);
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer .right {
+  position: absolute;
+  right: 2rem;
+  max-height: 60%;
+  transition: transform 0.5s ease-in-out;
+  transform-origin: 100% 100%;
+}
+
+footer .right:hover {
+  transform: scale(10, 10) rotateX(360deg);
+}
 
 /* ### TODO ### Media Queries */
 
-/* ... your code here ... */
+@media screen and (max-width: 815px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .row section {
+    width: 80%;
+  }
+
+  .discovery__wrapper {
+    flex-direction: column;
+  }
+
+  .discovery__wrapper > * {
+    width: 100%;
+  }
+
+  header {
+    height: auto;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  header > * {
+    text-align: center;
+  }
+
+  header .left {
+    left: 1.5rem;
+    max-height: 50%;
+  }
+
+  header .center {
+    flex-basis: 100%;
+  }
+
+  header .right {
+    position: relative;
+    flex-basis: 100%;
+    right: 0;
+    font-size: 0.75rem;
+  }
+
+  .header__title {
+    font-size: 2rem;
+  }
+
+  fieldset input {
+    margin: 5px 0px 10px 0px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  fieldset {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .button {
+    max-width: 100%;
+  }
+}
