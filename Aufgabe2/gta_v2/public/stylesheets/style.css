@@ -318,9 +318,9 @@ footer .right {
   transform-origin: 100% 100%;
 }
 
-footer .right:hover {
+/*footer .right:hover {
   transform: scale(10, 10) rotateX(360deg);
-}
+}*/
 
 footer #sinz{
   position: absolute;
