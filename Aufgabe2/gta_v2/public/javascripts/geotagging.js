@@ -1,3 +1,4 @@
+import MAP_API_KEY from './config.js';
 // File origin: VS1LAB A2
 
 /* eslint-disable no-unused-vars */
@@ -15,6 +16,7 @@ const lat_name = document.getElementById("lat_name");
 const long_name_hidden = document.getElementById("long_name_hidden");
 const lat_name_hidden = document.getElementById("lat_name_hidden");
 
+const mapView = document.getElementById('mapView');
 /**
  * A class to help using the HTML5 Geolocation API.
  */
@@ -108,6 +110,8 @@ class MapManager {
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
+const mapManager = new MapManager(MAP_API_KEY);
+
 function updateLocation(){
     LocationHelper.findLocation((locationHelper) => {
         long_name.value = locationHelper.longitude;
@@ -115,6 +119,9 @@ function updateLocation(){
 
         lat_name.value = locationHelper.latitude;
         lat_name_hidden.value = locationHelper.latitude;
+
+        const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
+        mapView.src = newImageURL;
     });
 }
 
