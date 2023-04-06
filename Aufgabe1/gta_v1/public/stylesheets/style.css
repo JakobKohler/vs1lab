@@ -193,11 +193,12 @@ header {
     #0099ff,
     #00ff00,
     #ff3399,
-    #6666ff
+    #6666ff,
+    #0099ff
   );
   background-clip: text;
   color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite forwards;
+  animation: rainbow_animation 3s linear infinite forwards;
   background-size: 400% 100%;
 }
 
