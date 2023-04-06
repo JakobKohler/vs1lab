@@ -35,7 +35,6 @@ body {
 
   font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: var(--text-color);
-
   background-color: var(--background-color);
 }
 
@@ -308,6 +307,7 @@ footer {
 
   background-color: var(--offfff-color);
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
 footer .right {
@@ -320,6 +320,16 @@ footer .right {
 
 footer .right:hover {
   transform: scale(10, 10) rotateX(360deg);
+}
+
+footer #sinz{
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 120px;
+  width: 20%;
+  z-index: -1;
+  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 /* ### TODO ### Media Queries */
