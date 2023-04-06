@@ -182,6 +182,33 @@ header {
 
 .header__title {
   font-size: 3.33vw;
+  transition: all 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.header__title:hover {
+  transform: scaleX(3);
+  background: linear-gradient(
+    to right,
+    #6666ff,
+    #0099ff,
+    #00ff00,
+    #ff3399,
+    #6666ff
+  );
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 6s ease-in-out infinite forwards;
+  background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+  0% {
+    background-position: 100% 0;
+  }
+
+  100% {
+    background-position: 0 0;
+  }
 }
 
 header .left {
@@ -286,6 +313,12 @@ footer .right {
   position: absolute;
   right: 2rem;
   max-height: 60%;
+  transition: transform 0.5s ease-in-out;
+  transform-origin: 100% 100%;
+}
+
+footer .right:hover {
+  transform: scale(10, 10) rotateX(360deg);
 }
 
 /* ### TODO ### Media Queries */
