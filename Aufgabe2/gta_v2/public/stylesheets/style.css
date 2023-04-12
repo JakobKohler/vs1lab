@@ -22,6 +22,7 @@ html {
   --text-color: #f3e9d2;
   --offfff-color: #1a936f;
   --button-color: #e22e5e;
+  --peng-transform: translateX(0) scale(0.25) rotate(0)
 }
 
 /* HTML element styles */
@@ -260,8 +261,18 @@ header img:hover {
   /*transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);*/
 }
 
-.discovery__map img:hover {
-  border-radius: 10px;
+.discovery__map::after {
+  content: url(../images/gentoo.png);
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  height: 0;
+  width: 0;
+  transform: var(--peng-transform);
+  transform-origin: center;
+  top: calc(-60%);
+  z-index: -10;
+  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .discovery__map span {
@@ -322,7 +333,7 @@ footer .right {
   transform: scale(10, 10) rotateX(360deg);
 }*/
 
-footer #sinz{
+footer #sinz {
   position: absolute;
   top: 0;
   left: 0;
@@ -351,7 +362,9 @@ footer #sinz{
   .discovery__wrapper > * {
     width: 100%;
   }
-
+  .discovery__map::after {
+    display: none;
+  }
   header {
     height: auto;
     justify-content: center;
