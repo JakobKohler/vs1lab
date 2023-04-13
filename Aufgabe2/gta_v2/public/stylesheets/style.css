@@ -22,7 +22,8 @@ html {
   --text-color: #f3e9d2;
   --offfff-color: #1a936f;
   --button-color: #e22e5e;
-  --peng-transform: translateX(0) scale(0.25) rotate(0)
+  --peng-transform: translateX(0) scale(0.25) rotate(0);
+  --sinz-scout: scale(0.3) translateY(0);
 }
 
 /* HTML element styles */
@@ -318,7 +319,6 @@ footer {
 
   background-color: var(--offfff-color);
   box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.2);
-  overflow: hidden;
 }
 
 footer .right {
@@ -333,13 +333,18 @@ footer .right {
   transform: scale(10, 10) rotateX(360deg);
 }*/
 
-footer #sinz {
+footer::after {
+  content: url("https://media.discordapp.net/attachments/931506996665016321/1093465151761551392/sinz.png");
   position: absolute;
+  display: inline-block;
+  vertical-align: top;
+  height: 0;
+  width: 0;
+  transform: var(--sinz-scout);
+  transform-origin: center;
   top: 0;
   left: 0;
-  max-width: 120px;
-  width: 20%;
-  z-index: -1;
+  z-index: -10;
   transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
