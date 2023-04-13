@@ -11,10 +11,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Penne Places</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
-  <link rel="stylesheet" href="../public/stylesheets/style.css" />
+  <link rel="stylesheet" href="./stylesheets/style.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script src="./javascripts/geotagging.js" defer type="module"></script>
-  <script src="./javascripts/effects.js" defer></script>
 </head>
 
 <body>
@@ -61,8 +60,8 @@
           </legend>
           <label for="text_field_searchterm">What are you looking for:</label>
           <input type="text" id="searchterm" name="text_field_searchterm" size="20" placeholder="e.g. Moltke Mensa" />
-          <input type="text" id="lat_name_hidden" hidden />
-          <input type="text" id="long_name_hidden" hidden />
+          <input type="text" id="lat_name_hidden" name="text_field_search_lat" hidden />
+          <input type="text" id="long_name_hidden" name="text_field_search_lon" hidden />
           <input class="button" type="submit" value="Search" />
         </fieldset>
       </form>
@@ -72,7 +71,7 @@
         <div class="discovery__taglist">
           <ul class="discovery__results" id="discoveryResults">
             <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-                <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
+              <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
             <% }); %>
           </ul>
         </div>

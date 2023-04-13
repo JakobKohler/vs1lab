@@ -31,6 +31,8 @@ const GeoTag = require('../models/geotag');
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
 
+const currentStore = new GeoTagStore();
+
 /**
  * Route '/' for HTTP 'GET' requests.
  * (http://expressjs.com/de/4x/api.html#app.get.method)
@@ -42,7 +44,8 @@ const GeoTagStore = require('../models/geotag-store');
 
 // TODO: extend the following route example if necessary
 router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+  console.log('SIIIUUU');
+  res.render('index', { taglist: []})
 });
 
 /**
@@ -60,7 +63,13 @@ router.get('/', (req, res) => {
  * by radius around a given location.
  */
 
-// TODO: ... your code here ...
+router.post('/tagging', (req, res) => {
+    const newTag = [req.body.text_field_name, req.body.text_field_latitude, req.body.text_field_longitude, req.body.text_field_hashtag];
+    currentStore.addGeoTag(newTag);
+
+    let nearbyTags = currentStore.getNearbyGeoTags(req.body.text_field_latitude, req.body.text_field_longitude);
+    res.render('index', { taglist: nearbyTags });
+});
 
 /**
  * Route '/discovery' for HTTP 'POST' requests.
@@ -78,6 +87,9 @@ router.get('/', (req, res) => {
  * by radius and keyword.
  */
 
-// TODO: ... your code here ...
+router.post('/discovery', (req, res) => {
+  let nearbyTags = currentStore.searchNearbyGeoTags(req.body.text_field_search_lat, req.body.text_field_search_lon, req.body.text_field_searchterm);
+  res.render('index', { taglist: nearbyTags });
+})
 
 module.exports = router;

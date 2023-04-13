@@ -1,5 +1,8 @@
 // File origin: VS1LAB A3
 
+const GeoTag = require("./geotag");
+const GeoTagExamples = require('./geotag-examples');
+
 /**
  * This script is a template for exercise VS1lab/Aufgabe3
  * Complete all TODOs in the code documentation.
@@ -25,7 +28,54 @@
  */
 class InMemoryGeoTagStore{
 
-    // TODO: ... your code here ...
+    #geoTagArr = [];
+
+    addGeoTag(geoTag){
+        const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
+        this.#geoTagArr.push(geoTagElement);
+    }
+
+    removeGeoTag(geoTag){
+        //In welcher Form kommt der GeoTag hier an?
+        for(let i = 0; i < this.#geoTagArr.length; i++){
+            if(this.#geoTagArr[i].name == geoTag[0]){
+                this.#geoTagArr.splice(i, 1);
+            }
+        }
+    }
+    
+    getNearbyGeoTags(lat, lon){
+        const r = 0.1;
+        let nearbyTags = [];
+        for(let i = 0; i < this.#geoTagArr.length; i++){
+            if(lat - this.#geoTagArr[i].latitude < r && lon - this.#geoTagArr[i].longitude < r){
+                nearbyTags.push(this.#geoTagArr[i]);
+            }
+        }
+        return nearbyTags;
+    }
+
+    searchNearbyGeoTags(lat, lon, keyword){
+        let nearbyTags = this.getNearbyGeoTags(lat, lon);
+        if(!keyword) return nearbyTags;
+        
+        for(let i = 0; i < nearbyTags; i++){
+            if (nearbyTags[i].name.contains(keyword) || nearbyTags[i].hashtag.contains(keyword)){
+                continue;
+            }
+
+            nearbyTags.splice(i, 1);
+        }
+
+        return nearbyTags;
+    }
+
+    constructor(){
+        let exampleTags = GeoTagExamples.tagList;
+        for (let i = 0; i < exampleTags.length; i++) {
+            this.addGeoTag(exampleTags[i]);
+        }
+    }
 
 }
 
