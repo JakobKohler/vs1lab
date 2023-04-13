@@ -1,3 +1,4 @@
+import MAP_API_KEY from './config.js';
 // File origin: VS1LAB A2
 
 /* eslint-disable no-unused-vars */
@@ -9,6 +10,13 @@
 // Try to find this output in the browser...
 console.log("The geoTagging script is going to start...");
 
+// Constants for http elements
+const long_name = document.getElementById("long_name");
+const lat_name = document.getElementById("lat_name");
+const long_name_hidden = document.getElementById("long_name_hidden");
+const lat_name_hidden = document.getElementById("lat_name_hidden");
+
+const mapView = document.getElementById('mapView');
 /**
  * A class to help using the HTML5 Geolocation API.
  */
@@ -54,7 +62,7 @@ class LocationHelper {
             // Pass the locationHelper object to the callback.
             callback(helper);
         }, (error) => {
-            alert(error.message)
+            console.log(error.message)
         });
     }
 }
@@ -102,9 +110,22 @@ class MapManager {
  * A function to retrieve the current location and update the page.
  * It is called once the page has been fully loaded.
  */
-// ... your code here ...
+const mapManager = new MapManager(MAP_API_KEY);
+
+function updateLocation(){
+    LocationHelper.findLocation((locationHelper) => {
+        long_name.value = locationHelper.longitude;
+        long_name_hidden.value = locationHelper.longitude;
+
+        lat_name.value = locationHelper.latitude;
+        lat_name_hidden.value = locationHelper.latitude;
+
+        const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
+        mapView.src = newImageURL;
+    });
+}
 
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
-    alert("Please change the script 'geotagging.js'");
+    updateLocation();
 });
