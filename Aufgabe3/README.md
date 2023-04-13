@@ -126,14 +126,14 @@ Zur Übersicht folgen noch mal alle Anforderungen in kompakter Form als Checklis
 ### 1. Teilaufgabe: Server-Implementierung
 
 - [ ] **Skripte** für Backend Funktionen fertigstellen
-  - [ ] **Klasse für GeoTag Objekte** erstellen (`./model/geotag.js`)
+  - [x] **Klasse für GeoTag Objekte** erstellen (`./model/geotag.js`)
   - [ ] **Klasse zur GeoTag Speicherung** erstellen (`./model/geotag-store.js`)
     - [ ] Privaten Array nutzen
     - [ ] Methoden `addGeoTag`, `removeGeoTag`, `getNearbyGeoTags`, `searchNearbyGeoTags` realisieren
   - [ ] **Beispieldaten für GeoTag Objekte** einlesen (`./model/geotag-examples.js`)
 
 - [ ] **Server Konfiguration und Routen** fertigstellen
-  - [ ] **Statische Dateien** bereitstellen (`./app.js`)
+  - [x] **Statische Dateien** bereitstellen (`./app.js`)
   - [ ] Route `/tagging` zur **GeoTags Speicherung** erstellen. (`./routes/index.js`)
   - [ ] Route `/discovery` zur **GeoTag Abfrage** erstellen. (`./routes/index.js`)
 
