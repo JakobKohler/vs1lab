@@ -22,8 +22,6 @@ html {
   --text-color: #f3e9d2;
   --offfff-color: #1a936f;
   --button-color: #e22e5e;
-  --peng-transform: translateX(0) scale(0.25) rotate(0);
-  --sinz-scout: scale(0.25) translateY(0);
 }
 
 /* HTML element styles */
@@ -291,20 +289,6 @@ header img:hover {
   /*transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);*/
 }
 
-/*.discovery__map::after {
-  content: url(../images/gentoo.png);
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  height: 0;
-  width: 0;
-  transform: var(--peng-transform);
-  transform-origin: center;
-  top: calc(-60%);
-  z-index: -10;
-  transition: all 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
-}*/
-
 .discovery__map span {
   display: block;
   margin-top: 10px;
@@ -360,24 +344,9 @@ footer .right {
   transform-origin: 100% 100%;
 }
 
-/*footer .right:hover {
-  transform: scale(10, 10) rotateX(360deg);
-}*/
-
-/*footer::after {
-  content: url("https://media.discordapp.net/attachments/931506996665016321/1093465151761551392/sinz.png");
-  position: absolute;
-  display: inline-block;
-  vertical-align: top;
-  height: 0;
-  width: 0;
-  transform: var(--sinz-scout);
-  transform-origin: center;
-  top: 0;
-  left: 0;
-  z-index: -10;
-  transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-}*/
+footer .right:hover {
+  transform: scale(10, 10);
+}
 
 /* ### TODO ### Media Queries */
 
