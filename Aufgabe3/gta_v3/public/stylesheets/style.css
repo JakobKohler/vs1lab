@@ -41,8 +41,37 @@ body {
 }
 
 a {
+  text-decoration: none;
   color: var(--link-color);
+  position: relative;
+  padding: 0.2em 0;
+
 }
+
+a:hover{
+  color: var(--text-color);
+}
+
+a::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  transition: opacity 300ms, transform 300ms;
+  background-color: var(--text-color);
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+  border-radius: 1000px;
+}
+
+a:hover::after, a:focus::after{
+  transform: translate3d(0, 0.2em, 0);
+  transform: scale(1);
+}
+
 
 /* ### TODO ### Styles for other HTML elements */
 
@@ -226,7 +255,7 @@ header .center {
 header .right {
   position: absolute;
   right: 2rem;
-  font-size: 1vw;
+  font-size: 1.3vw;
 }
 
 header img {
