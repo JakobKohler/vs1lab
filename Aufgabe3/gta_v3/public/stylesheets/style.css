@@ -348,6 +348,46 @@ footer .right:hover {
   transform: scale(10, 10);
 }
 
+/* about page */
+
+.main__developpers{
+  display: flexbox;
+  justify-content: space-around;
+}
+
+.main__developpers h2{
+  text-align: center;
+}
+
+.devs fieldset{
+  display: flex;
+  justify-content: space-around;
+  border-width: 0;
+  padding: 20px;
+}
+
+.devs legend{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.devs img{
+  max-width: 50%;
+  border-radius: 1000px;
+}
+
+.main__application #text{
+  margin: 20px;
+  text-align: justify;
+  text-align-last: none;
+}
+
+.main__application img{
+  float: left;
+  margin: 20px;
+  max-width: 15%;
+}
+
 /* ### TODO ### Media Queries */
 
 @media screen and (max-width: 815px) {
@@ -367,9 +407,7 @@ footer .right:hover {
   .discovery__wrapper > * {
     width: 100%;
   }
-  /*.discovery__map::after {
-    display: none;
-  }*/
+ 
   header {
     height: auto;
     justify-content: center;

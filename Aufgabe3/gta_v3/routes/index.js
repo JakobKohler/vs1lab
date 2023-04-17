@@ -92,4 +92,9 @@ router.post('/discovery', (req, res) => {
   res.render('index', { taglist: nearbyTags });
 })
 
+/* about */
+router.get('/about', (req,res) =>{
+  res.render('about');
+})
+
 module.exports = router;
