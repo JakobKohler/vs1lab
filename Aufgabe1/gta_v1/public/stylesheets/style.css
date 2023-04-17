@@ -319,7 +319,7 @@ footer .right {
 }
 
 footer .right:hover {
-  transform: scale(10, 10) rotateX(360deg);
+  transform: scale(10, 10);
 }
 
 /* ### TODO ### Media Queries */
