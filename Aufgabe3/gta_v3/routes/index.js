@@ -97,4 +97,9 @@ router.get('/about', (req,res) =>{
   res.render('about');
 })
 
+/* help */
+router.get('/help', (req,res) =>{
+  res.render('help');
+})
+
 module.exports = router;
