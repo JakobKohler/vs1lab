@@ -46,11 +46,11 @@ a {
 
 }
 
-a:hover{
+header a:hover{
   color: var(--text-color);
 }
 
-a::after{
+header a::after{
   content: '';
   position: absolute;
   bottom: 0;
@@ -65,7 +65,7 @@ a::after{
   border-radius: 1000px;
 }
 
-a:hover::after, a:focus::after{
+header a:hover::after, a:focus::after{
   transform: translate3d(0, 0.2em, 0);
   transform: scale(1);
 }
@@ -366,14 +366,24 @@ footer .right:hover {
   padding: 20px;
 }
 
+.devs fieldset a{
+  display: flex;
+  justify-content: space-around;
+  max-width: 50%;
+}
+
 .devs legend{
   margin-left: auto;
   margin-right: auto;
 }
 
 .devs img{
-  max-width: 50%;
+  max-width: 100%;
   border-radius: 1000px;
+}
+
+.devs img:hover{
+  transform: scale(1.05);
 }
 
 .main__application #text{
