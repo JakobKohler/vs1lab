@@ -337,13 +337,45 @@ footer {
 
 footer .right {
   position: absolute;
-  right: 2rem;
   max-height: 60%;
+}
+
+.footer__navigation {
+  position: absolute;
+  right: 6rem;
+}
+
+footer a:hover{
+  color: var(--text-color);
+}
+
+footer a::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  transition: opacity 300ms, transform 300ms;
+  background-color: var(--text-color);
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+  border-radius: 1000px;
+}
+
+footer a:hover::after, a:focus::after{
+  transform: translate3d(0, 0.2em, 0);
+  transform: scale(1);
+}
+
+.footer__image {
+  right: 2rem;
   transition: transform 0.5s ease-in-out;
   transform-origin: 100% 100%;
 }
 
-footer .right:hover {
+.footer__image:hover {
   transform: scale(10, 10);
 }
 
@@ -386,6 +418,10 @@ footer .right:hover {
   transform: scale(1.05);
 }
 
+.main__application{
+  margin-bottom: 1rem;
+}
+
 .main__application #text{
   margin: 20px;
   text-align: justify;
@@ -413,6 +449,20 @@ footer .right:hover {
 .main__faq #answer{
   text-align: justify;
   text-align-last: none;
+}
+
+/* imprint page*/
+
+.imprint_text {
+  display: flexbox;
+  justify-content: space-around;
+}
+
+/* privacy page*/
+.privacy_text {
+  display: flexbox;
+  justify-content: space-around;
+  margin-bottom: 1rem;
 }
 
 /* ### TODO ### Media Queries */
@@ -463,6 +513,10 @@ footer .right:hover {
 
   .header__title {
     font-size: 2rem;
+  }
+
+  header img:hover {
+    transform: scale(1.2);
   }
 
   fieldset input {

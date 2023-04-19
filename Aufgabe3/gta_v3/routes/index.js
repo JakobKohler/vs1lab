@@ -102,4 +102,14 @@ router.get('/help', (req,res) =>{
   res.render('help');
 })
 
+/* imprint */
+router.get('/imprint', (req,res) =>{
+  res.render('imprint');
+})
+
+/* privacy */
+router.get('/privacy', (req,res) =>{
+  res.render('privacy');
+})
+
 module.exports = router;
