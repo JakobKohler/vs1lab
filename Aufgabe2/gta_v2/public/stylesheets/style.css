@@ -333,7 +333,7 @@ footer .right {
   transform: scale(10, 10) rotateX(360deg);
 }*/
 
-footer::after {
+/*footer::after {
   content: url("https://media.discordapp.net/attachments/931506996665016321/1093465151761551392/sinz.png");
   position: absolute;
   display: inline-block;
@@ -346,7 +346,7 @@ footer::after {
   left: 0;
   z-index: -10;
   transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
+}*/
 
 /* ### TODO ### Media Queries */
 
