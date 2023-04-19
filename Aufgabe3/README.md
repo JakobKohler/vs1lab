@@ -132,10 +132,10 @@ Zur Übersicht folgen noch mal alle Anforderungen in kompakter Form als Checklis
     - [x] Methoden `addGeoTag`, `removeGeoTag`, `getNearbyGeoTags`, `searchNearbyGeoTags` realisieren
   - [x] **Beispieldaten für GeoTag Objekte** einlesen (`./model/geotag-examples.js`)
 
-- [ ] **Server Konfiguration und Routen** fertigstellen
+- [x] **Server Konfiguration und Routen** fertigstellen
   - [x] **Statische Dateien** bereitstellen (`./app.js`)
   - [x] Route `/tagging` zur **GeoTags Speicherung** erstellen. (`./routes/index.js`)
-  - [ ] Route `/discovery` zur **GeoTag Abfrage** erstellen. (`./routes/index.js`)
+  - [x] Route `/discovery` zur **GeoTag Abfrage** erstellen. (`./routes/index.js`)
 
 - [ ] Server **Template** erweitern (`./views/index.ejs`)
   - [ ] Koordinaten in Formulare eintragen
