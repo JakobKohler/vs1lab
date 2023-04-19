@@ -197,7 +197,7 @@ fieldset label.hidden_label {
 header {
   display: flex;
   flex-wrap: wrap;
-  height: 15vh;
+  height: 8rem;
   margin-bottom: 1rem;
 
   position: relative;
