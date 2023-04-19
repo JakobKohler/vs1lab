@@ -262,13 +262,12 @@ header img {
 
 header img:hover {
   transform: scale(1.2);
+  transform: rotateY(360deg);
 }
 
 /* ### TODO ### Styles for Main Component */
 
 /* ### TODO ### Styles for Tagging component */
-
-/* ... your code here ... */
 
 /* ### TODO ### Styles for Discovery component */
 
