@@ -4,7 +4,7 @@ const footer = document.getElementById('footer');
 
 hashtag_input.addEventListener('input', (value) => {
     if(hashtag_input.value.includes('sinz')){
-        footer.style.overflow = 'visible';
+        footer.style.overflow = 'visible';``
         footer.style.setProperty('--sinz-scout', 'scale(0.3) translateY(-280px)');
     } if(hashtag_input.value.includes('peng')){
         map.style.setProperty('--peng-transform', 'translateX(-100px) scale(0.25) rotate(-30deg)');
