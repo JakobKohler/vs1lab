@@ -197,7 +197,7 @@ fieldset label.hidden_label {
 header {
   display: flex;
   flex-wrap: wrap;
-  height: 15vh;
+  height: 8rem;
   margin-bottom: 1rem;
 
   position: relative;
@@ -258,10 +258,12 @@ header .right {
 
 header img {
   transition: all 2s cubic-bezier(0.075, 0.82, 0.165, 1);
+  cursor: pointer;
 }
 
 header img:hover {
   transform: scale(1.2);
+  transform: rotateY(360deg);
 }
 
 header .hamburger{
@@ -281,8 +283,6 @@ header .bar{
 /* ### TODO ### Styles for Main Component */
 
 /* ### TODO ### Styles for Tagging component */
-
-/* ... your code here ... */
 
 /* ### TODO ### Styles for Discovery component */
 
@@ -352,13 +352,45 @@ footer {
 
 footer .right {
   position: absolute;
-  right: 2rem;
   max-height: 60%;
+}
+
+.footer__navigation {
+  position: absolute;
+  right: 6rem;
+}
+
+footer a:hover{
+  color: var(--text-color);
+}
+
+footer a::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.1em;
+  transition: opacity 300ms, transform 300ms;
+  background-color: var(--text-color);
+  opacity: 1;
+  transform: scale(0);
+  transform-origin: center;
+  border-radius: 1000px;
+}
+
+footer a:hover::after, a:focus::after{
+  transform: translate3d(0, 0.2em, 0);
+  transform: scale(1);
+}
+
+.footer__image {
+  right: 2rem;
   transition: transform 0.5s ease-in-out;
   transform-origin: 100% 100%;
 }
 
-footer .right:hover {
+.footer__image:hover {
   transform: scale(10, 10);
 }
 
@@ -394,10 +426,15 @@ footer .right:hover {
 .devs img{
   max-width: 100%;
   border-radius: 1000px;
+  box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.3);
 }
 
 .devs img:hover{
   transform: scale(1.05);
+}
+
+.main__application{
+  margin-bottom: 1rem;
 }
 
 .main__application #text{
@@ -410,6 +447,37 @@ footer .right:hover {
   float: left;
   margin: 20px;
   max-width: 15%;
+}
+
+/* help page*/
+
+.main__faq{
+  display: flexbox;
+  justify-content: space-around;
+}
+
+.main__faq fieldset{
+  padding: 20px;
+  margin-bottom: 1rem;
+}
+
+.main__faq #answer{
+  text-align: justify;
+  text-align-last: none;
+}
+
+/* imprint page*/
+
+.imprint_text {
+  display: flexbox;
+  justify-content: space-around;
+}
+
+/* privacy page*/
+.privacy_text {
+  display: flexbox;
+  justify-content: space-around;
+  margin-bottom: 1rem;
 }
 
 /* ### TODO ### Media Queries */
@@ -491,6 +559,10 @@ footer .right:hover {
 
   .header__title {
     font-size: 2rem;
+  }
+
+  header img:hover {
+    transform: scale(1.2);
   }
 
   fieldset input {

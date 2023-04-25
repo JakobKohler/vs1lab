@@ -57,17 +57,15 @@ class InMemoryGeoTagStore{
 
     searchNearbyGeoTags(lat, lon, keyword){
         let nearbyTags = this.getNearbyGeoTags(lat, lon);
+        let filteredTags = [];
         if(!keyword) return nearbyTags;
-        
-        for(let i = 0; i < nearbyTags; i++){
-            if (nearbyTags[i].name.contains(keyword) || nearbyTags[i].hashtag.contains(keyword)){
-                continue;
+
+        for(let i = 0; i < nearbyTags.length; i++){
+            if (nearbyTags[i].name.includes(keyword) || nearbyTags[i].hashtag.includes(keyword)){
+                filteredTags.push(nearbyTags[i]);
             }
-
-            nearbyTags.splice(i, 1);
         }
-
-        return nearbyTags;
+        return filteredTags;
     }
 
     constructor(){
