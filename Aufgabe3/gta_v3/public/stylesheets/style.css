@@ -264,6 +264,20 @@ header img:hover {
   transform: scale(1.2);
 }
 
+header .hamburger{
+  display: none;
+}
+
+header .bar{
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--link-color);
+}
+
 /* ### TODO ### Styles for Main Component */
 
 /* ### TODO ### Styles for Tagging component */
@@ -436,12 +450,43 @@ footer .right:hover {
   header .center {
     flex-basis: 100%;
   }
-
+/*
   header .right {
     position: relative;
     flex-basis: 100%;
     right: 0;
     font-size: 0.75rem;
+  }
+*/
+  .header__navigation{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem;
+    z-index: 1;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 70%;
+    border-radius: 10px;
+    
+    background-color: var(--offfff-color);
+  }
+
+  .header__navigation.active{
+    top: 15%;
+  }
+
+  .header__navigation a{
+    font-size: 1rem;
+  }
+
+  header .hamburger{
+    display: block;
+    cursor: pointer;
   }
 
   .header__title {
