@@ -42,12 +42,12 @@ const currentStore = new GeoTagStore();
  * As response, the ejs-template is rendered without geotag objects.
  */
 
-const LocationHelper = require('../public/javascripts/location-helper')
+const LocationHelper = require('../public/javascripts/location-helper2');
+const locationHelper = new LocationHelper;
 
 // TODO: extend the following route example if necessary
 router.get("/", (req, res) => {
   console.log("SIIIUUU");
-  const locationHelper = new LocationHelper;
   res.render("index", { taglist: [],
                         latitude: locationHelper.latitude,
                         longitude: locationHelper.longitude});
@@ -81,7 +81,9 @@ router.post("/tagging", (req, res) => {
     req.body.text_field_latitude,
     req.body.text_field_longitude
   );
-  res.render("index", { taglist: nearbyTags });
+  res.render("index", { taglist: nearbyTags,
+                        latitude: locationHelper.latitude,
+                        longitude: locationHelper.longitude});
 });
 
 /**
@@ -106,7 +108,9 @@ router.post("/discovery", (req, res) => {
     req.body.text_field_search_lon,
     req.body.text_field_searchterm
   );
-  res.render("index", { taglist: nearbyTags });
+  res.render("index", { taglist: nearbyTags,
+                        latitude: locationHelper.latitude,
+                        longitude: locationHelper.longitude});
 });
 
 /* about */

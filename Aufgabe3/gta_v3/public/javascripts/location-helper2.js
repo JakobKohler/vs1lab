@@ -57,4 +57,4 @@ class LocationHelper {
         });
     }
 }
-export default LocationHelper;
+module.exports = LocationHelper;
