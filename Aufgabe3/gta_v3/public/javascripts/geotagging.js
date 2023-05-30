@@ -17,7 +17,7 @@ console.log("The geoTagging script is going to start...");
 const long_name = document.getElementById("long_name");
 const lat_name = document.getElementById("lat_name");
 const long_name_hidden = document.getElementById("long_name_hidden");
-const lat_name_hidden = document.getElementById("lat_name_hidden");
+const lat_name_hidden = document.getElementById("lat_name_hidden"); 
 
 const mapView = document.getElementById('mapView');
 
@@ -29,18 +29,39 @@ const mapView = document.getElementById('mapView');
 const mapManager = new MapManager(MAP_API_KEY);
 
 function updateLocation(){
-    if(long_name.value == "/" && lat_name.value == "/"){
+    // if(long_name.value == "/" && lat_name.value == "/"){
+    //     LocationHelper.findLocation((locationHelper) => {
+    //         long_name.value = locationHelper.longitude;
+    //         long_name_hidden.value = locationHelper.longitude;
+    
+    //         lat_name.value = locationHelper.latitude;
+    //         lat_name_hidden.value = locationHelper.latitude;
+            
+    //         let taglist_json = JSON.parse(mapView.data-tagList);
+            
+    //         const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
+    //         mapView.src = newImageURL;
+    //     });
+    // }
+
+    let longitude = long_name_hidden.value;
+    let latitude = lat_name_hidden.value;
+
+    if(longitude == "" && latitude == ""){
         LocationHelper.findLocation((locationHelper) => {
-            long_name.value = locationHelper.longitude;
-            long_name_hidden.value = locationHelper.longitude;
-    
-            lat_name.value = locationHelper.latitude;
-            lat_name_hidden.value = locationHelper.latitude;
-    
-            const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
-            mapView.src = newImageURL;
+            longitude = locationHelper.longitude;
+            latitude = locationHelper.latitude;
+
+            long_name.value = longitude;
+            long_name_hidden.value = longitude;
+        
+            lat_name.value = latitude;
+            lat_name_hidden.value = latitude;
         });
     }
+
+    //const taglist_json = JSON.parse(mapView.data-tags);
+    mapView.src = mapManager.getMapUrl(latitude, longitude);
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
