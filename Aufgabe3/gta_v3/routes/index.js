@@ -49,7 +49,8 @@ router.get("/", (req, res) => {
   let latitude = req.body.text_field_latitude;
   res.render("index", { taglist: [],
                         longitude: longitude,
-                        latitude: latitude});
+                        latitude: latitude,
+                        data: "[]"});
 });
 
 /**
@@ -83,10 +84,12 @@ router.post("/tagging", (req, res) => {
     req.body.text_field_latitude,
     req.body.text_field_longitude
   );
+
+  let data = JSON.stringify(nearbyTags);
   
   res.render("index", { taglist: nearbyTags,
                         longitude: longitude,
-                        latitude: latitude});
+                        latitude: latitude, data: data});
 });
 
 /**
@@ -108,14 +111,19 @@ router.post("/tagging", (req, res) => {
 router.post("/discovery", (req, res) => {
   let longitude = req.body.text_field_longitude;
   let latitude = req.body.text_field_latitude;
+
   let nearbyTags = currentStore.searchNearbyGeoTags(
     req.body.text_field_search_lat,
     req.body.text_field_search_lon,
     req.body.text_field_searchterm
   );
+
+  let data = JSON.stringify(nearbyTags);
+
   res.render("index", { taglist: nearbyTags,
                         latitude: latitude,
-                        longitude: longitude});
+                        longitude: longitude,
+                        data: data});
 });
 
 /* about */
