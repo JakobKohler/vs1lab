@@ -45,7 +45,11 @@ const currentStore = new GeoTagStore();
 // TODO: extend the following route example if necessary
 router.get("/", (req, res) => {
   console.log("SIIIUUU");
-  res.render("index", { taglist: []});
+  let longitude = req.body.text_field_longitude;
+  let latitude = req.body.text_field_latitude;
+  res.render("index", { taglist: [],
+                        longitude: longitude,
+                        latitude: latitude});
 });
 
 /**
@@ -64,6 +68,9 @@ router.get("/", (req, res) => {
  */
 
 router.post("/tagging", (req, res) => {
+  let longitude = req.body.text_field_longitude;
+  let latitude = req.body.text_field_latitude;
+
   const newTag = [
     req.body.text_field_name,
     req.body.text_field_latitude,
@@ -76,7 +83,10 @@ router.post("/tagging", (req, res) => {
     req.body.text_field_latitude,
     req.body.text_field_longitude
   );
-  res.render("index", { taglist: nearbyTags});
+  
+  res.render("index", { taglist: nearbyTags,
+                        longitude: longitude,
+                        latitude: latitude});
 });
 
 /**
@@ -96,12 +106,16 @@ router.post("/tagging", (req, res) => {
  */
 
 router.post("/discovery", (req, res) => {
+  let longitude = req.body.text_field_longitude;
+  let latitude = req.body.text_field_latitude;
   let nearbyTags = currentStore.searchNearbyGeoTags(
     req.body.text_field_search_lat,
     req.body.text_field_search_lon,
     req.body.text_field_searchterm
   );
-  res.render("index", { taglist: nearbyTags});
+  res.render("index", { taglist: nearbyTags,
+                        latitude: latitude,
+                        longitude: longitude});
 });
 
 /* about */

@@ -29,16 +29,18 @@ const mapView = document.getElementById('mapView');
 const mapManager = new MapManager(MAP_API_KEY);
 
 function updateLocation(){
-    LocationHelper.findLocation((locationHelper) => {
-        long_name.value = locationHelper.longitude;
-        long_name_hidden.value = locationHelper.longitude;
-
-        lat_name.value = locationHelper.latitude;
-        lat_name_hidden.value = locationHelper.latitude;
-
-        const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
-        mapView.src = newImageURL;
-    });
+    if(long_name.value == "/" && lat_name.value == "/"){
+        LocationHelper.findLocation((locationHelper) => {
+            long_name.value = locationHelper.longitude;
+            long_name_hidden.value = locationHelper.longitude;
+    
+            lat_name.value = locationHelper.latitude;
+            lat_name_hidden.value = locationHelper.latitude;
+    
+            const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
+            mapView.src = newImageURL;
+        });
+    }
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
