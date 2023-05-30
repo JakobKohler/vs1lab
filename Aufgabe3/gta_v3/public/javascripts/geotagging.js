@@ -30,8 +30,6 @@ const mapManager = new MapManager(MAP_API_KEY);
 
 function updateLocation(){
     LocationHelper.findLocation((locationHelper) => {
-        console.log("test");
-
         long_name.value = locationHelper.longitude;
         long_name_hidden.value = locationHelper.longitude;
 
