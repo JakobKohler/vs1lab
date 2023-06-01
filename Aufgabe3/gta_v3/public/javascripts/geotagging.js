@@ -19,7 +19,7 @@ const lat_name = document.getElementById("lat_name");
 const long_name_hidden = document.getElementById("long_name_hidden");
 const lat_name_hidden = document.getElementById("lat_name_hidden"); 
 
-const mapView = document.getElementById('mapView');
+const mapView = document.getElementById("mapView");
 
 /**
  * TODO: 'updateLocation'
@@ -47,6 +47,10 @@ function updateLocation(){
     let longitude = long_name_hidden.value;
     let latitude = lat_name_hidden.value;
 
+    //MOYIE-KOMMENTAR: data-tags-Attribut gibt inkorrekten JSON-String zurück, Abbruch bei Lehrzeichen (siehe nachfolgenden console-log in der Browser Konsole)
+    console.log(mapView.dataset.tags);
+    const taglist_json = JSON.parse(mapView.dataset.tags); //...dadurch parsing nicht möglich, hier ABBRUCH
+
     if(longitude == "" && latitude == ""){
         LocationHelper.findLocation((locationHelper) => {
             longitude = locationHelper.longitude;
@@ -57,11 +61,12 @@ function updateLocation(){
         
             lat_name.value = latitude;
             lat_name_hidden.value = latitude;
-        });
-    }
+            
 
-    //const taglist_json = JSON.parse(mapView.data-tags);
-    mapView.src = mapManager.getMapUrl(latitude, longitude);
+            //MOYIE-KOMMENTAR: grade noch innerhalb, damit die Karte funktioniert, ansonsten Problem, da syncron
+            mapView.src = mapManager.getMapUrl(latitude, longitude, taglist_json);
+        });
+    }    
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation

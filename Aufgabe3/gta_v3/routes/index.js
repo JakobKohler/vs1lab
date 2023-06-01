@@ -47,10 +47,11 @@ router.get("/", (req, res) => {
   console.log("SIIIUUU");
   let longitude = req.body.text_field_longitude;
   let latitude = req.body.text_field_latitude;
+  const data = '[]'
   res.render("index", { taglist: [],
                         longitude: longitude,
                         latitude: latitude,
-                        data: "[]"});
+                        data: data });
 });
 
 /**
@@ -85,11 +86,12 @@ router.post("/tagging", (req, res) => {
     req.body.text_field_longitude
   );
 
-  let data = JSON.stringify(nearbyTags);
+  const data = JSON.stringify(nearbyTags);
   
   res.render("index", { taglist: nearbyTags,
                         longitude: longitude,
-                        latitude: latitude, data: data});
+                        latitude: latitude,
+                        data: data});
 });
 
 /**
@@ -119,11 +121,13 @@ router.post("/discovery", (req, res) => {
   );
 
   let data = JSON.stringify(nearbyTags);
+  //MOYIE-KOMMENTAR: JSON-String wird richtig generiert, siehe nachfolgenden console-log
+  console.log("data: " + data);
 
   res.render("index", { taglist: nearbyTags,
                         latitude: latitude,
                         longitude: longitude,
-                        data: data});
+                        data: data });
 });
 
 /* about */
