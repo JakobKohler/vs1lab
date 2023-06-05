@@ -1,5 +1,4 @@
 // File origin: VS1LAB A3
-const { v4: uuidv4 } = require('uuid');
 /**
  * This script is a template for exercise VS1lab/Aufgabe3
  * Complete all TODOs in the code documentation.
@@ -14,7 +13,6 @@ class GeoTag {
     #longitude = '';
     #name = '';
     #hashtag = '';
-    #UUID = '';
 
     get latitude(){
         return this.#latitude;
@@ -32,16 +30,11 @@ class GeoTag {
         return this.#hashtag;
     }
 
-    get UUID(){
-        return this.#UUID;
-    }
-
     constructor(name, lat, lon, hash){
         this.#latitude = lat;
         this.#longitude = lon;
         this.#name = name;
         this.#hashtag = hash;
-        this.#UUID = uuidv4();
     }
 
     toJSON(){
