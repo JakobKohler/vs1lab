@@ -34,7 +34,7 @@ class InMemoryGeoTagStore{
         //const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
 
         //MOYIE-KOMMENTAR: constructor in geotag.js generiert nicht die richtigen Typen
-        const geoTagElement = {name: geoTag[0], latitude: geoTag[1], longitude: geoTag[2], hashtag: geoTag[3]};
+        const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
         this.#geoTagArr.push(geoTagElement);
     }
 

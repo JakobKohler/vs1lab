@@ -43,6 +43,15 @@ class GeoTag {
         this.#hashtag = hash;
         this.#UUID = uuidv4();
     }
+
+    toJSON(){
+        return {
+            name: this.#name,
+            latitude: this.#latitude,
+            longitude: this.#longitude,
+            hashtag: this.#hashtag,
+        };
+    }
         
 }
 

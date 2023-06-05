@@ -87,6 +87,7 @@ router.post("/tagging", (req, res) => {
   );
 
   const data = JSON.stringify(nearbyTags);
+  console.log(data);
   
   res.render("index", { taglist: nearbyTags,
                         longitude: longitude,
