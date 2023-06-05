@@ -122,9 +122,6 @@ router.post("/discovery", (req, res) => {
   );
 
   let data = JSON.stringify(nearbyTags);
-  //MOYIE-KOMMENTAR: JSON-String wird richtig generiert, siehe nachfolgenden console-log
-  console.log("data: " + data);
-
   res.render("index", { taglist: nearbyTags,
                         latitude: latitude,
                         longitude: longitude,

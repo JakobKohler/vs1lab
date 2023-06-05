@@ -31,9 +31,6 @@ class InMemoryGeoTagStore{
     #geoTagArr = [];
 
     addGeoTag(geoTag){
-        //const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
-
-        //MOYIE-KOMMENTAR: constructor in geotag.js generiert nicht die richtigen Typen
         const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
         this.#geoTagArr.push(geoTagElement);
     }
@@ -49,13 +46,13 @@ class InMemoryGeoTagStore{
     
     getNearbyGeoTags(lat, lon){
         const r = 0.1;
-        let nearbyTags = [];
-        for(let i = 0; i < this.#geoTagArr.length; i++){
+        //let nearbyTags = [];
+        /*for(let i = 0; i < this.#geoTagArr.length; i++){
             if(lat - this.#geoTagArr[i].latitude < r && lon - this.#geoTagArr[i].longitude < r){
                 nearbyTags.push(this.#geoTagArr[i]);
             }
-        }
-        return nearbyTags;
+        }*/
+        return this.#geoTagArr.filter(tag => lat - tag.latitude < r && lon - tag.longitude < r);
     }
 
     searchNearbyGeoTags(lat, lon, keyword){

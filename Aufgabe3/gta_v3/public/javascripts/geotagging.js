@@ -28,45 +28,27 @@ const mapView = document.getElementById("mapView");
  */
 const mapManager = new MapManager(MAP_API_KEY);
 
-function updateLocation(){
-    // if(long_name.value == "/" && lat_name.value == "/"){
-    //     LocationHelper.findLocation((locationHelper) => {
-    //         long_name.value = locationHelper.longitude;
-    //         long_name_hidden.value = locationHelper.longitude;
-    
-    //         lat_name.value = locationHelper.latitude;
-    //         lat_name_hidden.value = locationHelper.latitude;
-            
-    //         let taglist_json = JSON.parse(mapView.data-tagList);
-            
-    //         const newImageURL = mapManager.getMapUrl(locationHelper.latitude, locationHelper.longitude);
-    //         mapView.src = newImageURL;
-    //     });
-    // }
-
+async function updateLocation(){
     let longitude = long_name_hidden.value;
     let latitude = lat_name_hidden.value;
 
-    //MOYIE-KOMMENTAR: data-tags-Attribut gibt inkorrekten JSON-String zurück, Abbruch bei Lehrzeichen (siehe nachfolgenden console-log in der Browser Konsole)
-    console.log(mapView.dataset.tags);
     const taglist_json = JSON.parse(mapView.dataset.tags); //...dadurch parsing nicht möglich, hier ABBRUCH
-
+    
     if(longitude == "" && latitude == ""){
         LocationHelper.findLocation((locationHelper) => {
             longitude = locationHelper.longitude;
             latitude = locationHelper.latitude;
-
             long_name.value = longitude;
             long_name_hidden.value = longitude;
         
             lat_name.value = latitude;
             lat_name_hidden.value = latitude;
-            
-
-            //MOYIE-KOMMENTAR: grade noch innerhalb, damit die Karte funktioniert, ansonsten Problem, da syncron
             mapView.src = mapManager.getMapUrl(latitude, longitude, taglist_json);
         });
-    }    
+    }else{
+        mapView.src = mapManager.getMapUrl(latitude, longitude, taglist_json);
+    }
+    
 }
 
 // Wait for the page to fully load its DOM content, then call updateLocation
