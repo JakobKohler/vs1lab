@@ -26,6 +26,7 @@ const GeoTag = require('../models/geotag');
  */
 // eslint-disable-next-line no-unused-vars
 const GeoTagStore = require('../models/geotag-store');
+const currentStore = new GeoTagStore;
 
 // App routes (A3)
 
@@ -64,6 +65,19 @@ router.get("/", (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.get("/api/geotags", (req,res) => {
+  let longitude = req.body.text_field_longitude;
+  let latitude = req.body.text_field_latitude;
+  let searchterm = req.body.text_field_searchterm;
+
+  if (searchterm != null) {
+    currentJson = JSON.stringify(Object.fromEntries(currentStore.searchNearbyGeoTags(latitude, longitude, searchterm)));
+  } else {
+    currentJson = JSON.stringify(Object.fromEntries(currentStore.getNearbyGeoTags(latitude, longitude)));
+  }
+
+  res.json(currentStore);
+});
 
 
 /**
@@ -78,7 +92,12 @@ router.get("/", (req, res) => {
  */
 
 // TODO: ... your code here ...
-
+router.post("/api/geotags", (req,res) => {
+  let id = currentStore.addGeoTag(req.body);
+  
+  res.json(JSON.stringify(currentStore.get(id)));
+  res.status(201).end();
+});
 
 /**
  * Route '/api/geotags/:id' for HTTP 'GET' requests.
@@ -91,6 +110,10 @@ router.get("/", (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.get("/api/geotags/:id", (req,res) => {
+  let id = req.params.id;
+  res.json(JSON.stringify(currentStore.get(id)));
+});
 
 
 /**
@@ -108,6 +131,17 @@ router.get("/", (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.put("/api/geotags/:id", (req,res) => {
+  let id = req.params.id;
+  let json_tag = JSON.parse(req.body);
+  let newTag = new GeoTag(json_tag.name, 
+                          json_tag.latitude, 
+                          json_tag.longitude, 
+                          json_tag. hashtag);
+  currentStore.get(id) = newTag;
+  res.json(JSON.stringify(currentStore.get(id)));
+  res.status(202).end();
+});
 
 
 /**
@@ -122,6 +156,13 @@ router.get("/", (req, res) => {
  */
 
 // TODO: ... your code here ...
+router.delete("/api/geotags/:id", (req,res) => {
+  let id = req.params.id;
+  let oldTag = currentStore.get(id);
+  currentStore.delete(id);
+  res.json(JSON.stringify(oldTag));
+  res.status(202).end();
+});
 
 /* about */
 router.get("/about", (req, res) => {
