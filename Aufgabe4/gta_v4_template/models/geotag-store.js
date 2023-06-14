@@ -32,8 +32,9 @@ class InMemoryGeoTagStore{
 
     addGeoTag(geoTag){
         id = this.#geoTagMap.length;
-        const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
+        const geoTagElement = new GeoTag(geoTag.latitude, geoTag.longitude, geoTag.name, geoTag.hashtag);
         this.#geoTagMap.push(id ,geoTagElement);
+        return id;
     }
 
     removeGeoTag(id){
@@ -48,16 +49,16 @@ class InMemoryGeoTagStore{
                 nearbyTags.push(this.#geoTagArr[i]);
             }
         }*/
-        return this.#geoTagArr.filter(tag => lat - tag.latitude < r && lon - tag.longitude < r);
+        return this.#geoTagMap.filter(tag => lat - tag.latitude < r && lon - tag.longitude < r);
     }
 
     searchNearbyGeoTags(lat, lon, keyword){
         let nearbyTags = this.getNearbyGeoTags(lat, lon);
-        let filteredTags = [];
+        let filteredTags = new Map;
         if(!keyword) return nearbyTags;
 
         for(let i = 0; i < nearbyTags.length; i++){
-            if (nearbyTags[i].name.includes(keyword) || nearbyTags[i].hashtag.includes(keyword)){
+            if (nearbyTags.get(i).name.includes(keyword) || nearbyTags.get(i).hashtag.includes(keyword)){
                 filteredTags.push(nearbyTags[i]);
             }
         }
@@ -70,7 +71,6 @@ class InMemoryGeoTagStore{
             this.addGeoTag(exampleTags[i]);
         }
     }
-
 }
 
 module.exports = InMemoryGeoTagStore
