@@ -31,8 +31,8 @@ class InMemoryGeoTagStore{
     #geoTagMap = new Map;
 
     addGeoTag(geoTag){
-        id = this.#geoTagMap.length;
-        const geoTagElement = new GeoTag(geoTag.latitude, geoTag.longitude, geoTag.name, geoTag.hashtag);
+        id = this.#geoTagMap.size;
+        const geoTagElement = new GeoTag(geoTag.name, geoTag.latitude, geoTag.longitude,  geoTag.hashtag);
         this.#geoTagMap.push(id ,geoTagElement);
         return id;
     }
@@ -43,26 +43,12 @@ class InMemoryGeoTagStore{
     
     getNearbyGeoTags(lat, lon){
         const r = 0.1;
-        //let nearbyTags = [];
-        /*for(let i = 0; i < this.#geoTagArr.length; i++){
-            if(lat - this.#geoTagArr[i].latitude < r && lon - this.#geoTagArr[i].longitude < r){
-                nearbyTags.push(this.#geoTagArr[i]);
-            }
-        }*/
-        return this.#geoTagMap.filter(tag => lat - tag.latitude < r && lon - tag.longitude < r);
+        return  new Map([...this.#geoTagMap].filter((id,tag)=>tag => lat - tag.latitude < r && lon - tag.longitude < r));
     }
 
     searchNearbyGeoTags(lat, lon, keyword){
         let nearbyTags = this.getNearbyGeoTags(lat, lon);
-        let filteredTags = new Map;
-        if(!keyword) return nearbyTags;
-
-        for(let i = 0; i < nearbyTags.length; i++){
-            if (nearbyTags.get(i).name.includes(keyword) || nearbyTags.get(i).hashtag.includes(keyword)){
-                filteredTags.push(nearbyTags[i]);
-            }
-        }
-        return filteredTags;
+        return new Map([...nearbyTags].filter((id,tag)=>tag.name.includes(keyword) || tag.hashtag.includes(keyword)));
     }
 
     constructor(){
