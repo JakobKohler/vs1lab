@@ -72,8 +72,10 @@ router.get("/api/geotags", (req,res) => {
 
   if (searchterm != null) {
     currentJson = JSON.stringify(Object.fromEntries(currentStore.searchNearbyGeoTags(latitude, longitude, searchterm)));
-  } else {
+  } else if (latitude != null && longitude != null) {
     currentJson = JSON.stringify(Object.fromEntries(currentStore.getNearbyGeoTags(latitude, longitude)));
+  } else {
+    currentJson = JSON.stringify(Object.fromEntries(currentStore));
   }
 
   res.json(currentStore);
