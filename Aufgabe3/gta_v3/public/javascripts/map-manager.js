@@ -1,4 +1,4 @@
-// File origin: VS1LAB A2 
+// File origin: VS1LAB A2
 
 /**
  * A class to help using the MapQuest map service.
@@ -23,7 +23,7 @@ class MapManager {
      * @param {number} zoom The map zoom, defaults to 11
      * @returns {string} URL of generated map
      */
-    getMapUrl(latitude, longitude, tags = [], zoom = 11) {
+    getMapUrl(latitude, longitude, tags = [], zoom = 14) {
         if (!this.#apiKey) {
             console.log("No API key provided.");
             return "images/mapview.jpg";
@@ -38,3 +38,4 @@ class MapManager {
         return mapQuestUrl;
     }
 }
+export default MapManager;
