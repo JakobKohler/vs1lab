@@ -38,8 +38,15 @@ const GeoTagStore = require('../models/geotag-store');
  * As response, the ejs-template is rendered without geotag objects.
  */
 
-router.get('/', (req, res) => {
-  res.render('index', { taglist: [] })
+router.get("/", (req, res) => {
+  console.log("SIIIUUU");
+  let longitude = req.body.text_field_longitude;
+  let latitude = req.body.text_field_latitude;
+  const data = '[]'
+  res.render("index", { taglist: [],
+                        longitude: longitude,
+                        latitude: latitude,
+                        data: data });
 });
 
 // API routes (A4)
@@ -115,5 +122,25 @@ router.get('/', (req, res) => {
  */
 
 // TODO: ... your code here ...
+
+/* about */
+router.get("/about", (req, res) => {
+  res.render("about");
+});
+
+/* help */
+router.get("/help", (req, res) => {
+  res.render("help");
+});
+
+/* imprint */
+router.get("/imprint", (req, res) => {
+  res.render("imprint");
+});
+
+/* privacy */
+router.get("/privacy", (req, res) => {
+  res.render("privacy");
+});
 
 module.exports = router;
