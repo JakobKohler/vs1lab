@@ -28,20 +28,16 @@ const GeoTagExamples = require('./geotag-examples');
  */
 class InMemoryGeoTagStore{
 
-    #geoTagArr = [];
+    #geoTagMap = new Map;
 
     addGeoTag(geoTag){
+        id = this.#geoTagMap.length;
         const geoTagElement = new GeoTag(geoTag[0], geoTag[1], geoTag[2], geoTag[3]);
-        this.#geoTagArr.push(geoTagElement);
+        this.#geoTagMap.push(id ,geoTagElement);
     }
 
-    removeGeoTag(geoTag){
-        //In welcher Form kommt der GeoTag hier an?
-        for(let i = 0; i < this.#geoTagArr.length; i++){
-            if(this.#geoTagArr[i].name == geoTag[0]){
-                this.#geoTagArr.splice(i, 1);
-            }
-        }
+    removeGeoTag(id){
+        this.#geoTagMap.delete(id);
     }
     
     getNearbyGeoTags(lat, lon){
