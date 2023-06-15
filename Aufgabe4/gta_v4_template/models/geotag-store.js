@@ -29,12 +29,14 @@ const GeoTagExamples = require('./geotag-examples');
 class InMemoryGeoTagStore{
 
     #geoTagMap = new Map;
+    #currentID = 0;
 
     addGeoTag(geoTag){
-        id = this.#geoTagMap.size;
+        let id = this.#currentID;
         const geoTagElement = new GeoTag(geoTag.name, geoTag.latitude, geoTag.longitude,  geoTag.hashtag);
-        this.#geoTagMap.push(id ,geoTagElement);
-        return id;
+        this.#geoTagMap.set(id ,geoTagElement);
+        this.#currentID++;
+        return geoTagElement;
     }
 
     removeGeoTag(id){
@@ -43,12 +45,32 @@ class InMemoryGeoTagStore{
     
     getNearbyGeoTags(lat, lon){
         const r = 0.1;
-        return  new Map([...this.#geoTagMap].filter((id,tag)=>tag => lat - tag.latitude < r && lon - tag.longitude < r));
+        return  new Map([...this.#geoTagMap].filter((id,tag) => lat - tag.latitude < r && lon - tag.longitude < r));
     }
 
     searchNearbyGeoTags(lat, lon, keyword){
         let nearbyTags = this.getNearbyGeoTags(lat, lon);
         return new Map([...nearbyTags].filter((id,tag)=>tag.name.includes(keyword) || tag.hashtag.includes(keyword)));
+    }
+
+    getById(id){
+        return this.#geoTagMap.get(parseInt(id));
+    }
+
+    deleteById(id){
+        let oldTag = this.getById(id);
+        this.#geoTagMap.delete(parseInt(id));
+        return oldTag;
+    }
+
+    updateId(id, newTag){
+        console.log(this.#geoTagMap);
+        this.#geoTagMap.set(parseInt(id), newTag);
+        console.log(this.#geoTagMap);
+    }
+
+    getAll(){
+        return this.#geoTagMap;
     }
 
     constructor(){

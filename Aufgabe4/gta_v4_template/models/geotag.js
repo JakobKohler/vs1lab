@@ -45,6 +45,10 @@ class GeoTag {
             hashtag: this.#hashtag,
         };
     }
+
+    toString(){
+        return JSON.stringify(this.toJSON())
+    }
         
 }
 

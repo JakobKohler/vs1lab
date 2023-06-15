@@ -75,10 +75,10 @@ router.get("/api/geotags", (req,res) => {
   } else if (latitude != null && longitude != null) {
     currentJson = JSON.stringify(Object.fromEntries(currentStore.getNearbyGeoTags(latitude, longitude)));
   } else {
-    currentJson = JSON.stringify(Object.fromEntries(currentStore));
+    currentJson = JSON.stringify(Object.fromEntries(currentStore.getAll()));
   }
 
-  res.json(currentStore);
+  res.json(currentJson);
 });
 
 
@@ -95,9 +95,10 @@ router.get("/api/geotags", (req,res) => {
 
 // TODO: ... your code here ...
 router.post("/api/geotags", (req,res) => {
-  let id = currentStore.addGeoTag(req.body);
+  console.log(req.body);
+  let tag = currentStore.addGeoTag(req.body);
   
-  res.json(JSON.stringify(currentStore.get(id)));
+  res.json(JSON.stringify(tag));
   res.status(201).end();
 });
 
@@ -114,7 +115,7 @@ router.post("/api/geotags", (req,res) => {
 // TODO: ... your code here ...
 router.get("/api/geotags/:id", (req,res) => {
   let id = req.params.id;
-  res.json(JSON.stringify(currentStore.get(id)));
+  res.json(JSON.stringify(currentStore.getById(id)));
 });
 
 
@@ -135,13 +136,13 @@ router.get("/api/geotags/:id", (req,res) => {
 // TODO: ... your code here ...
 router.put("/api/geotags/:id", (req,res) => {
   let id = req.params.id;
-  let json_tag = JSON.parse(req.body);
+  let json_tag = req.body;
   let newTag = new GeoTag(json_tag.name, 
                           json_tag.latitude, 
                           json_tag.longitude, 
                           json_tag. hashtag);
-  currentStore.get(id) = newTag;
-  res.json(JSON.stringify(currentStore.get(id)));
+  currentStore.updateId(id, newTag);
+  res.json(JSON.stringify(newTag));
   res.status(202).end();
 });
 
@@ -160,8 +161,7 @@ router.put("/api/geotags/:id", (req,res) => {
 // TODO: ... your code here ...
 router.delete("/api/geotags/:id", (req,res) => {
   let id = req.params.id;
-  let oldTag = currentStore.get(id);
-  currentStore.delete(id);
+  let oldTag = currentStore.deleteById(id);
   res.json(JSON.stringify(oldTag));
   res.status(202).end();
 });
