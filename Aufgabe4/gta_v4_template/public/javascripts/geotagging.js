@@ -16,8 +16,13 @@ console.log("The geoTagging script is going to start...");
 // Constants for http elements
 const long_name = document.getElementById("long_name");
 const lat_name = document.getElementById("lat_name");
+const tag_name = document.getElementById("tagg_name");
+const hashtag = document.getElementById("hashtag");
+
 const long_name_hidden = document.getElementById("long_name_hidden");
-const lat_name_hidden = document.getElementById("lat_name_hidden"); 
+const lat_name_hidden = document.getElementById("lat_name_hidden");
+
+const form_tagging = document.getElementById("tag-form");
 
 const mapView = document.getElementById("mapView");
 
@@ -51,7 +56,29 @@ async function updateLocation(){
     
 }
 
+async function postTag(tag){
+    let response = await fetch("http://localhost:3000/api/geotags", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(tag),
+    });
+    return await response.json();
+}
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     updateLocation();
+});
+
+form_tagging.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let tag = {
+        name: tag_name.value,
+        latitude: lat_name.value,
+        longitude: long_name.value,
+        hashtag: hashtag.value
+    }
+
+    postTag(tag);
 });
