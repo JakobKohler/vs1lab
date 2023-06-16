@@ -21,8 +21,11 @@ const hashtag = document.getElementById("hashtag");
 
 const long_name_hidden = document.getElementById("long_name_hidden");
 const lat_name_hidden = document.getElementById("lat_name_hidden");
+const searchterm = document.getElementById("searchterm");
 
 const form_tagging = document.getElementById("tag-form");
+
+const form_discovery = document.getElementById("discoveryFilterForm");
 
 const mapView = document.getElementById("mapView");
 
@@ -65,6 +68,22 @@ async function postTag(tag){
     return await response.json();
 }
 
+async function getTags(){
+    let data = {
+        text_field_latitude: lat_name_hidden.value,
+        text_field_longitude: long_name_hidden.value,
+        text_field_searchterm: searchterm.value
+    }
+
+    let taglist = await fetch("http://localhost:3000/api/geotags", {
+        method: "GET",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data),
+    });
+
+    return await taglist.json();
+}
+
 // Wait for the page to fully load its DOM content, then call updateLocation
 document.addEventListener("DOMContentLoaded", () => {
     updateLocation();
@@ -81,4 +100,11 @@ form_tagging.addEventListener("submit", function(event) {
     }
 
     postTag(tag);
+});
+
+form_discovery.addEventListener("submit", function(event){
+    event.preventDefault();
+
+    taglist = getTags();
+    updateLocation();
 });
