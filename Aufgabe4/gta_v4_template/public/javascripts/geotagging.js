@@ -78,7 +78,7 @@ async function getTags(){
     let taglist = await fetch(url, {
         method: "GET",
     });
-
+    console.log("Triggered getTags");
     console.log(taglist);
 
     return await taglist.json();

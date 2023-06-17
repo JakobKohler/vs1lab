@@ -45,12 +45,24 @@ class InMemoryGeoTagStore{
     
     getNearbyGeoTags(lat, lon){
         const r = 0.1;
-        return  new Map([...this.#geoTagMap].filter((id,tag) => lat - tag.latitude < r && lon - tag.longitude < r));
+        let filteredTags = new Map();
+        for(let [key, tag] of this.#geoTagMap){
+            if(lat - tag.latitude < r && lon - tag.longitude < r)
+            filteredTags.set(key, tag);
+        }
+        return filteredTags;
     }
 
     searchNearbyGeoTags(lat, lon, keyword){
         let nearbyTags = this.getNearbyGeoTags(lat, lon);
-        return new Map([...nearbyTags].filter((id,tag)=>tag.name.includes(keyword) || tag.hashtag.includes(keyword)));
+        let searchedTags = new Map();
+
+        for(let [key, tag] of nearbyTags){
+            if(tag.name.includes(keyword) || tag.hashtag.includes(keyword)){
+                searchedTags.set(key, tag);
+            }
+        }
+        return searchedTags;
     }
 
     getById(id){
