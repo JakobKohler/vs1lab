@@ -72,10 +72,11 @@
       <div class="discovery__wrapper">
         <div class="discovery__taglist">
           <ul class="discovery__results" id="discoveryResults">
-            <% if (taglist !== undefined) taglist.forEach(function(gtag) { %>
-              <li><%= gtag.name %> ( <%= gtag.latitude %>,<%= gtag.longitude %>) <%= gtag.hashtag %> </li>
-            <% }); %>
+            
           </ul>
+          <div class="page-nav" id="page-nav" data-currentpage="0" data-total="0">
+            <button class="page-btn" id="page-left">⮜</button> <span id="page-count">2/3</span> <button class="page-btn" id="page-right">⮞</button>
+          </div>
         </div>
 
         <div class="discovery__map" id="map_img">

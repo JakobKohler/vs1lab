@@ -127,11 +127,11 @@ fieldset label.hidden_label {
   background-color: var(--button-color);
 }
 
-.button:hover {
+.button:hover , .page-btn:hover{
   transform: scale(1.05);
 }
 
-.button:active {
+.button:active, .page-btn:active{
   transform: scale(0.95);
 }
 
@@ -480,6 +480,24 @@ footer a:hover::after, a:focus::after{
   justify-content: space-around;
   margin-bottom: 1rem;
 }
+
+.page-nav{
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-btn{
+  padding: 10px;
+  background-color: var(--button-color);
+  border: none;
+  margin: 1em;
+  border-radius: 10px;
+  color: var(--text-color);
+  font-weight: bolder;
+}
+
 
 /* ### TODO ### Media Queries */
 

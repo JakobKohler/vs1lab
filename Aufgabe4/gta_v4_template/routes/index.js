@@ -28,6 +28,8 @@ const GeoTag = require('../models/geotag');
 const GeoTagStore = require('../models/geotag-store');
 const currentStore = new GeoTagStore;
 
+const PAGE_LIMIT = 4;
+
 // App routes (A3)
 
 /**
@@ -63,7 +65,6 @@ router.get("/", (req, res) => {
  * If 'latitude' and 'longitude' are available, it will be further filtered based on radius.
  */
 
-// TODO: ... your code here ...
 router.get("/api/geotags", (req,res) => {
   let longitude = req.query.longitude || "";
   let latitude = req.query.latitude || "";
@@ -73,25 +74,29 @@ router.get("/api/geotags", (req,res) => {
 
   let currentJson = fetchRelevantTags(latitude, longitude, searchterm);
 
-  res.json(JSON.stringify(currentJson));
+  res.json(currentJson);
 });
 
-router.get("/api/geotags/pages/:pageNum", (req, res) => {
-  const pageSize = 5;
+//Route for fetching individual pages
+router.get("/api/geotags/pages/", (req, res) => {
 
   let longitude = req.query.longitude || "";
   let latitude = req.query.latitude || "";
   let searchterm = req.query.searchterm || "";
-  let pageNum = req.params.pageNum;
+  let pageNum = parseInt(req.query.page);
 
-  let currentJson = fetchRelevantTags(latitude, longitude, searchterm);
-  const entries = Object.entries(currentJson);
-  
-  const currentPageContent = entries.slice(pageNum * pageSize, (pageNum+1) * pageSize);
-  console.log(currentPageContent);
+  let currentJson = fetchRelevantTags(latitude, longitude, searchterm); //Fetch relevant tags as usual
 
+  const entries = Object.entries(currentJson); //Turn into entries in order to slice out page
+  const currentPageContent = entries.slice(pageNum * PAGE_LIMIT, (pageNum+1) * PAGE_LIMIT); //Slice out requested page
+
+  let returnObject = {pageTags: Object.fromEntries(currentPageContent)};//Create new Object to return
+  returnObject["total"] = entries.length; //Add info about total tags
+
+  res.json(returnObject);
 });
 
+//Regular function to fetch relevant geotags
 function fetchRelevantTags(latitude, longitude, searchterm){
   let currentJson;
   if (searchterm != "") {
@@ -122,7 +127,7 @@ router.post("/api/geotags", (req,res) => {
   console.log(req.body);
   let element = currentStore.addGeoTag(req.body);
   
-  res.json(JSON.stringify(element));
+  res.json({pageTags: element, total:1}); //Changed format of return object
   res.status(201).end();
 });
 
@@ -139,7 +144,7 @@ router.post("/api/geotags", (req,res) => {
 // TODO: ... your code here ...
 router.get("/api/geotags/:id", (req,res) => {
   let id = req.params.id;
-  res.json(JSON.stringify(currentStore.getById(id)));
+  res.json(currentStore.getById(id));
 });
 
 
@@ -166,7 +171,7 @@ router.put("/api/geotags/:id", (req,res) => {
                           json_tag.longitude, 
                           json_tag. hashtag);
   currentStore.updateId(id, newTag);
-  res.json(JSON.stringify(newTag));
+  res.json(newTag);
   res.status(202).end();
 });
 
@@ -186,7 +191,7 @@ router.put("/api/geotags/:id", (req,res) => {
 router.delete("/api/geotags/:id", (req,res) => {
   let id = req.params.id;
   let oldTag = currentStore.deleteById(id);
-  res.json(JSON.stringify(oldTag));
+  res.json(oldTag);
   res.status(202).end();
 });
 

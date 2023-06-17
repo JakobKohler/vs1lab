@@ -29,6 +29,13 @@ const form_discovery = document.getElementById("discoveryFilterForm");
 
 const mapView = document.getElementById("mapView");
 
+const page_left = document.getElementById("page-left");
+const page_right = document.getElementById("page-right");
+const page_nav = document.getElementById("page-nav");
+const page_counter = document.getElementById("page-count");
+
+const PAGE_LIMIT = 4;
+
 /**
  * TODO: 'updateLocation'
  * A function to retrieve the current location and update the page.
@@ -68,12 +75,12 @@ async function postTag(tag){
     return await response.json();
 }
 
-async function getTags(){
+async function getTags(pageNum){
         let latitude = lat_name_hidden.value;
         let longitude = long_name_hidden.value;
         let searchterm = doc_searchterm.value;
 
-        let url = `http://localhost:3000/api/geotags?latitude=${latitude}&longitude=${longitude}&searchterm=${searchterm}`;
+        let url = `http://localhost:3000/api/geotags/pages?latitude=${latitude}&longitude=${longitude}&searchterm=${searchterm}&page=${pageNum}`;
 
     let taglist = await fetch(url, {
         method: "GET",
@@ -105,17 +112,52 @@ form_tagging.addEventListener("submit", function(event) {
 form_discovery.addEventListener("submit", function(event){
     event.preventDefault();
 
-    getTags().then(data => updateView(data));
+    getTags(0).then(data => {
+        updateView(data);
+        let pageCount = Math.floor(data["total"] / PAGE_LIMIT);
+        page_counter.innerText = `${parseInt(page_nav.dataset.currentpage)+1}/${pageCount+1}`;
+        page_nav.dataset.total = data["total"];
+    });
     updateLocation();
 });
+
+page_left.addEventListener("click", event => {
+    changePage(-1);
+});
+
+page_right.addEventListener("click", event => {
+    changePage(1);
+});
+
+function changePage(amount){
+    const largestPage = Math.floor(page_nav.dataset.total / PAGE_LIMIT);
+
+    const newPage = parseInt(page_nav.dataset.currentpage) + amount;
+
+    if(newPage > largestPage || newPage < 0) return;
+
+    page_nav.dataset.currentpage = newPage;
+    
+    getTags(newPage).then(data => {
+        updateView(data)
+        page_counter.innerText = `${newPage+1}/${largestPage+1}`;
+        page_nav.dataset.total = data["total"];
+    });
+};
 
 function updateView(data){
     const tagListDOM = document.getElementById("discoveryResults");
 
+    if(data["total"] > PAGE_LIMIT ){
+        page_nav.style.display = "flex";
+    }else{
+        page_nav.style.display = "none";
+    }
+
     let arrayOfTags = [];
     tagListDOM.innerHTML = "";
-
-    for (const [id, tag] of Object.entries(JSON.parse(data))) {
+    console.log(data);
+    for (const [id, tag] of Object.entries(data["pageTags"])) {
         console.log(tag);
         const newListItem = `<li> ${tag.name} ( ${tag.latitude},${tag.longitude}) ${tag.hashtag} </li>`;
         tagListDOM.innerHTML += newListItem;
@@ -127,3 +169,4 @@ function updateView(data){
 
     mapView.src = mapManager.getMapUrl(latitude, longitude, arrayOfTags);
 }
+
