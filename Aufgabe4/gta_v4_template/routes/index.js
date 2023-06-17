@@ -66,17 +66,26 @@ router.get("/", (req, res) => {
 
 // TODO: ... your code here ...
 router.get("/api/geotags", (req,res) => {
-  let longitude = req.body.text_field_longitude;
-  let latitude = req.body.text_field_latitude;
-  let searchterm = req.body.text_field_searchterm;
+  let longitude = req.query.longitude;
+  let latitude = req.query.latitude;
+  let searchterm = req.query.searchterm;
 
-  if (searchterm != null) {
+  console.log(("QUERY " + latitude + longitude + searchterm));
+
+  let currentJson;
+
+  if (searchterm != "") {
+    console.log("CASE1");
     currentJson = JSON.stringify(Object.fromEntries(currentStore.searchNearbyGeoTags(latitude, longitude, searchterm)));
-  } else if (latitude != null && longitude != null) {
+  } else if (latitude != "" && longitude != "") {
+    console.log("CASE2");
     currentJson = JSON.stringify(Object.fromEntries(currentStore.getNearbyGeoTags(latitude, longitude)));
   } else {
+    console.log("CASE3");
     currentJson = JSON.stringify(Object.fromEntries(currentStore.getAll()));
   }
+
+  console.log("RESPONSE "+currentJson);
 
   res.json(currentJson);
 });
