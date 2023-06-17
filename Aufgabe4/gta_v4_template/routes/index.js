@@ -65,29 +65,45 @@ router.get("/", (req, res) => {
 
 // TODO: ... your code here ...
 router.get("/api/geotags", (req,res) => {
-  let longitude = req.query.longitude;
-  let latitude = req.query.latitude;
-  let searchterm = req.query.searchterm;
+  let longitude = req.query.longitude || "";
+  let latitude = req.query.latitude || "";
+  let searchterm = req.query.searchterm || "";
 
   console.log(("QUERY " + latitude + longitude + searchterm));
 
-  let currentJson;
+  let currentJson = fetchRelevantTags(latitude, longitude, searchterm);
 
+  res.json(JSON.stringify(currentJson));
+});
+
+router.get("/api/geotags/pages/:pageNum", (req, res) => {
+  const pageSize = 5;
+
+  let longitude = req.query.longitude || "";
+  let latitude = req.query.latitude || "";
+  let searchterm = req.query.searchterm || "";
+  let pageNum = req.params.pageNum;
+
+  let currentJson = fetchRelevantTags(latitude, longitude, searchterm);
+  const entries = Object.entries(currentJson);
+  
+  const currentPageContent = entries.slice(pageNum * pageSize, (pageNum+1) * pageSize);
+  console.log(currentPageContent);
+
+});
+
+function fetchRelevantTags(latitude, longitude, searchterm){
+  let currentJson;
   if (searchterm != "") {
-    console.log("CASE1");
-    currentJson = JSON.stringify(Object.fromEntries(currentStore.searchNearbyGeoTags(latitude, longitude, searchterm)));
+    currentJson = Object.fromEntries(currentStore.searchNearbyGeoTags(latitude, longitude, searchterm));
   } else if (latitude != "" && longitude != "") {
-    console.log("CASE2");
-    currentJson = JSON.stringify(Object.fromEntries(currentStore.getNearbyGeoTags(latitude, longitude)));
+    currentJson = Object.fromEntries(currentStore.getNearbyGeoTags(latitude, longitude));
   } else {
-    console.log("CASE3");
-    currentJson = JSON.stringify(Object.fromEntries(currentStore.getAll()));
+    currentJson = Object.fromEntries(currentStore.getAll());
   }
 
-  console.log("RESPONSE "+currentJson);
-
-  res.json(currentJson);
-});
+  return currentJson;
+}
 
 
 /**
