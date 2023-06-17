@@ -40,7 +40,6 @@ const currentStore = new GeoTagStore;
  */
 
 router.get("/", (req, res) => {
-  console.log("SIIIUUU");
   let longitude = req.body.text_field_longitude;
   let latitude = req.body.text_field_latitude;
   const data = '[]'
@@ -105,9 +104,9 @@ router.get("/api/geotags", (req,res) => {
 // TODO: ... your code here ...
 router.post("/api/geotags", (req,res) => {
   console.log(req.body);
-  let tag = currentStore.addGeoTag(req.body);
+  let element = currentStore.addGeoTag(req.body);
   
-  res.json(JSON.stringify(tag));
+  res.json(JSON.stringify(element));
   res.status(201).end();
 });
 

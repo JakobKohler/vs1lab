@@ -99,13 +99,31 @@ form_tagging.addEventListener("submit", function(event) {
         hashtag: hashtag.value
     }
 
-    postTag(tag);
+    postTag(tag).then(data => updateView(data));
 });
 
 form_discovery.addEventListener("submit", function(event){
     event.preventDefault();
 
-    let taglist = getTags();
-    console.log(taglist);
+    getTags().then(data => updateView(data));
     updateLocation();
 });
+
+function updateView(data){
+    const tagListDOM = document.getElementById("discoveryResults");
+
+    let arrayOfTags = [];
+    tagListDOM.innerHTML = "";
+
+    for (const [id, tag] of Object.entries(JSON.parse(data))) {
+        console.log(tag);
+        const newListItem = `<li> ${tag.name} ( ${tag.latitude},${tag.longitude}) ${tag.hashtag} </li>`;
+        tagListDOM.innerHTML += newListItem;
+        arrayOfTags.push(tag);
+    }
+
+    let longitude = long_name_hidden.value;
+    let latitude = lat_name_hidden.value;
+
+    mapView.src = mapManager.getMapUrl(latitude, longitude, arrayOfTags);
+}

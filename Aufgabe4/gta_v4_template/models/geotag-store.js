@@ -36,7 +36,10 @@ class InMemoryGeoTagStore{
         const geoTagElement = new GeoTag(geoTag.name, geoTag.latitude, geoTag.longitude,  geoTag.hashtag);
         this.#geoTagMap.set(id ,geoTagElement);
         this.#currentID++;
-        return geoTagElement;
+        //return geoTagElement;
+        return {
+            [id]: geoTagElement
+        }
     }
 
     removeGeoTag(id){

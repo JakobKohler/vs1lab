@@ -330,6 +330,7 @@ header .bar{
   border-radius: 5px;
   text-overflow: ellipsis;
   background-color: #ffffff20;
+  text-align: center;
 }
 
 input[hidden] {
