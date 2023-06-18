@@ -114,7 +114,7 @@ form_discovery.addEventListener("submit", function(event){
 
     getTags(0).then(data => {
         updateView(data);
-        let pageCount = Math.floor(data["total"] / PAGE_LIMIT);
+        let pageCount = Math.floor((data["total"]-1) / PAGE_LIMIT);
         page_counter.innerText = `${parseInt(page_nav.dataset.currentpage)+1}/${pageCount+1}`;
         page_nav.dataset.total = data["total"];
     });
@@ -130,7 +130,7 @@ page_right.addEventListener("click", event => {
 });
 
 function changePage(amount){
-    const largestPage = Math.floor(page_nav.dataset.total / PAGE_LIMIT);
+    const largestPage = Math.floor((page_nav.dataset.total-1) / PAGE_LIMIT);
 
     const newPage = parseInt(page_nav.dataset.currentpage) + amount;
 
